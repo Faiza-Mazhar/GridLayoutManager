@@ -3,14 +3,11 @@ package com.example.gridlayoutmanager.ui.main
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gridlayoutmanager.R
-import org.intellij.lang.annotations.JdkConstants
 
 class MainFragment : Fragment(R.layout.main_fragment) {
 
@@ -27,9 +24,16 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         val layoutManager = GridLayoutManager(context, 2,  RecyclerView.VERTICAL, false)
         layoutManager.spanSizeLookup = object : SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
-                return  when(position) {
-                    0, 5 -> 2
-                    else -> 1
+                return when {
+                    LayoutPosition.Large.position.contains(position) -> {
+                        ViewSpan.FULL.span
+                    }
+                    LayoutPosition.Grid.position.contains(position) -> {
+                       ViewSpan.GRID.span
+                    }
+                    else -> {
+                        0
+                    }
                 }
             }
         }
