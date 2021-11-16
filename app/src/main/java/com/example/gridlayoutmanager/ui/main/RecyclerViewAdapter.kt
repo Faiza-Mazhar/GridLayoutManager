@@ -8,13 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gridlayoutmanager.R
 
 enum class ViewSpan(val span: Int) {
-    FULL(span = 2), GRID(span = 1)
+    LARGE(span = 2), GRID(span = 1)
 }
 
 enum class LayoutPosition(val position: MutableList<Int>) {
     Large (position = mutableListOf(0, 5, 6, 7)),
     Grid (position = mutableListOf(1, 2, 3, 4))
 }
+
 class RecyclerViewAdapter(private val items: List<String>):
 
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -25,7 +26,7 @@ class RecyclerViewAdapter(private val items: List<String>):
     ): RecyclerView.ViewHolder {
 
         return when(viewType) {
-            ViewSpan.FULL.ordinal -> {
+            ViewSpan.LARGE.ordinal -> {
                 val view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.full_width, parent, false)
                 FullWidthViewHolder(view)
@@ -53,7 +54,7 @@ class RecyclerViewAdapter(private val items: List<String>):
 
         return when {
             LayoutPosition.Large.position.contains(position) -> {
-                ViewSpan.FULL.ordinal
+                ViewSpan.LARGE.ordinal
             }
             LayoutPosition.Grid.position.contains(position) -> {
                 ViewSpan.GRID.ordinal
@@ -66,7 +67,7 @@ class RecyclerViewAdapter(private val items: List<String>):
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(getItemViewType(position)) {
-           ViewSpan.FULL.ordinal -> {
+           ViewSpan.LARGE.ordinal -> {
                (holder as FullWidthViewHolder).textView.text = items[position]
            }
            ViewSpan.GRID.ordinal -> {

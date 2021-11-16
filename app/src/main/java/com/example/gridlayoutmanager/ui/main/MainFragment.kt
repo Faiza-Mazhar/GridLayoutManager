@@ -22,11 +22,12 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         val layoutManager = GridLayoutManager(context, 2,  RecyclerView.VERTICAL, false)
+
         layoutManager.spanSizeLookup = object : SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 return when {
                     LayoutPosition.Large.position.contains(position) -> {
-                        ViewSpan.FULL.span
+                        ViewSpan.LARGE.span
                     }
                     LayoutPosition.Grid.position.contains(position) -> {
                        ViewSpan.GRID.span
