@@ -11,9 +11,9 @@ enum class ViewSpan(val span: Int) {
     LARGE(span = 2), GRID(span = 1)
 }
 
-enum class LayoutPosition(val position: MutableList<Int>) {
-    Large (position = mutableListOf(0, 5, 6, 7)),
-    Grid (position = mutableListOf(1, 2, 3, 4))
+enum class LayoutPosition(val position: List<Int>) {
+    Large (position = listOf(0, 5, 6, 7)),
+    Grid (position = listOf(1, 2, 3, 4))
 }
 
 class RecyclerViewAdapter(private val items: List<String>):
